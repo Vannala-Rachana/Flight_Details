@@ -1,0 +1,82 @@
+<div class="flight-container">
+    <div class="glass-card form-card">
+        <div class="card-header">
+            <h2 class="title">Flight Details</h2>
+            <button class="btn-text" (click)="logout()">Sign Out</button>
+        </div>
+
+        <div *ngIf="submissionStatus === 'success'" class="success-message">
+            <div class="icon-circle">✓</div>
+            <h3>Submission Successful!</h3>
+            <p>Thank you. Your flight details have been received.</p>
+            <button class="btn-primary" (click)="submissionStatus = 'idle'">Submit Another</button>
+        </div>
+
+        <form [formGroup]="flightForm" (ngSubmit)="onSubmit()" *ngIf="submissionStatus !== 'success'">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="airline">Airline</label>
+                    <input id="airline" type="text" formControlName="airline" placeholder="e.g. Delta">
+                    <div class="error-msg"
+                        *ngIf="flightForm.get('airline')?.touched && flightForm.get('airline')?.invalid">
+                        Airline is required
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="flightNumber">Flight Number</label>
+                    <input id="flightNumber" type="text" formControlName="flightNumber" placeholder="e.g. DL123">
+                    <div class="error-msg"
+                        *ngIf="flightForm.get('flightNumber')?.touched && flightForm.get('flightNumber')?.invalid">
+                        Flight Number is required
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="arrivalDate">Arrival Date</label>
+                    <input id="arrivalDate" type="date" formControlName="arrivalDate">
+                    <div class="error-msg"
+                        *ngIf="flightForm.get('arrivalDate')?.touched && flightForm.get('arrivalDate')?.invalid">
+                        Date is required
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="arrivalTime">Arrival Time</label>
+                    <input id="arrivalTime" type="time" formControlName="arrivalTime">
+                    <div class="error-msg"
+                        *ngIf="flightForm.get('arrivalTime')?.touched && flightForm.get('arrivalTime')?.invalid">
+                        Time is required
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="numOfGuests">Number of Guests</label>
+                    <input id="numOfGuests" type="number" formControlName="numOfGuests" min="1">
+                    <div class="error-msg"
+                        *ngIf="flightForm.get('numOfGuests')?.touched && flightForm.get('numOfGuests')?.invalid">
+                        At least 1 guest required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <label for="comments">Comments (Optional)</label>
+                <textarea id="comments" formControlName="comments" rows="3"
+                    placeholder="Any special requests?"></textarea>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary"
+                    [disabled]="flightForm.invalid || submissionStatus === 'submitting'">
+                    <span *ngIf="submissionStatus === 'submitting'">Submitting...</span>
+                    <span *ngIf="submissionStatus !== 'submitting'">Submit Details</span>
+                </button>
+            </div>
+
+            <div *ngIf="submissionStatus === 'error'" class="error-banner">
+                Something went wrong. Please try again.
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<header class="site-header">
+  <div class="brand">{{ title() }}</div>
+
+  <button type="button" class="theme-toggle" (click)="toggleTheme()">
+    {{ theme.theme === 'dark' ? '☀️ Light' : '🌙 Dark' }}
+  </button>
+</header>
+
+<router-outlet></router-outlet>

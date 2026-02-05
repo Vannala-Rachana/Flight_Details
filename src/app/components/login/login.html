@@ -1,0 +1,160 @@
+<div class="login-container">
+  <div class="login-card-wrapper">
+    <div class="glass-card login-card">
+      <h2 class="title">{{ isLoginMode ? 'Welcome Back' : 'Create Account' }}</h2>
+      <p class="subtitle">
+        {{ isLoginMode ? 'Please sign in to continue.' : 'Join us to get started.' }}
+      </p>
+
+      <form [formGroup]="authForm" (ngSubmit)="onEmailSubmit()">
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" formControlName="email" placeholder="Enter Email id" />
+          <div
+            class="error-msg"
+            *ngIf="authForm.get('email')?.touched && authForm.get('email')?.invalid"
+          >
+            Please enter a valid email.
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group password-group">
+          <label for="password">Password</label>
+
+          <div class="password-wrapper">
+            <input
+              id="password"
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Enter Password"
+            />
+
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="showPassword = !showPassword"
+              [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+            >
+              <span *ngIf="!showPassword">👁️</span>
+              <span *ngIf="showPassword">🙈</span>
+            </button>
+          </div>
+
+          <div
+            class="error-msg"
+            *ngIf="authForm.get('password')?.touched && authForm.get('password')?.invalid"
+          >
+            Password does not meet the requirements.
+          </div>
+
+          <!-- Password rules (signup only) -->
+          <ul class="password-rules" *ngIf="!isLoginMode">
+            <li [class.valid]="authForm.get('password')?.value?.length >= 8">
+              At least 8 characters
+            </li>
+            <li [class.valid]="/[A-Z]/.test(authForm.get('password')?.value || '')">
+              At least 1 uppercase letter
+            </li>
+            <li [class.valid]="/[a-z]/.test(authForm.get('password')?.value || '')">
+              At least 1 lowercase letter
+            </li>
+            <li [class.valid]="/\\d/.test(authForm.get('password')?.value || '')">
+              At least 1 number
+            </li>
+            <li [class.valid]="/[^A-Za-z0-9]/.test(authForm.get('password')?.value || '')">
+              At least 1 symbol
+            </li>
+          </ul>
+        </div>
+
+        <!-- Confirm Password (signup only) -->
+        <div class="form-group password-group" *ngIf="!isLoginMode">
+          <label for="confirmPassword">Confirm Password</label>
+
+          <div class="password-wrapper">
+            <input
+              id="confirmPassword"
+              [type]="showConfirmPassword ? 'text' : 'password'"
+              formControlName="confirmPassword"
+              placeholder="Confirm password"
+            />
+
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="showConfirmPassword = !showConfirmPassword"
+              [attr.aria-label]="showConfirmPassword ? 'Hide password' : 'Show password'"
+            >
+              <span *ngIf="!showConfirmPassword">👁️</span>
+              <span *ngIf="showConfirmPassword">🙈</span>
+            </button>
+          </div>
+
+          <div
+            class="error-msg"
+            *ngIf="
+              authForm.get('confirmPassword')?.touched && authForm.hasError('passwordMismatch')
+            "
+          >
+            Passwords do not match.
+          </div>
+        </div>
+
+        <!-- Messages -->
+        <div *ngIf="successMessage" class="success-banner mb-4">
+          {{ successMessage }}
+        </div>
+
+        <div *ngIf="errorMessage" class="error-banner mb-4">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Submit -->
+        <button
+          type="submit"
+          class="btn-primary mb-3"
+          [disabled]="authForm.invalid || isEmailLoading || isGoogleLoading"
+        >
+          {{ isEmailLoading ? 'Processing...' : isLoginMode ? 'Sign In' : 'Sign Up' }}
+        </button>
+
+        <!-- Toggle mode -->
+        <div class="text-center mb-4">
+          <button
+            type="button"
+            class="btn-text"
+            (click)="toggleMode()"
+            [disabled]="isEmailLoading || isGoogleLoading"
+          >
+            {{
+              isLoginMode ? "Don't have an account? Sign Up" : 'Already have an account? Sign In'
+            }}
+          </button>
+        </div>
+      </form>
+
+      <!-- Google only in login mode -->
+      <div class="divider" *ngIf="isLoginMode">
+        <span>OR</span>
+      </div>
+
+      <button
+        *ngIf="isLoginMode"
+        (click)="loginWithGoogle()"
+        class="btn-secondary"
+        [disabled]="isGoogleLoading || isEmailLoading"
+      >
+        <img
+          src="https://randolph.ces.ncsu.edu/wp-content/uploads/2024/04/unnamed.png"
+          alt="Google logo"
+          class="google-icon"
+          width="24"
+          height="24"
+        />
+        {{ isGoogleLoading ? 'Connecting...' : 'Sign in with Google' }}
+      </button>
+    </div>
+  </div>
+</div>

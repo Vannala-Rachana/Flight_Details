@@ -1,0 +1,80 @@
+:host {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 2rem 0;
+}
+body[data-theme='light'] {
+  --text-main: #000000; /* black text in light mode */
+}
+
+/* container centers content and adds side padding */
+.flight-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* main card width control */
+.form-card {
+  max-width: 800px;
+  width: 100%;
+}
+
+/* actions area */
+.form-actions {
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1.5rem;
+}
+
+input:focus,
+textarea:focus {
+  background: #454545;
+  box-shadow: none;
+  border-bottom: 2px solid #e87c03;
+  border-radius: 4px 4px 0 0;
+}
+
+/* === responsiveness only (added) === */
+
+/* small screens: slightly tighter padding */
+@media (max-width: 600px) {
+  :host {
+    padding: 1.5rem 0;
+  }
+
+  .flight-container {
+    padding: 0.75rem;
+  }
+}
+
+/* medium+ screens: increase max-width a bit if you want more room */
+@media (min-width: 1024px) {
+  .form-card {
+    max-width: 960px;
+  }
+}
+:host {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 2rem 0;
+  background: var(--bg-main);
+}
+
+.form-card {
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--card-border);
+}
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: left;
+  margin-bottom: 1.5rem;
+  color: var(--text-main);
+  background: none;
+  -webkit-text-fill-color: var(--text-main);
+}

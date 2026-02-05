@@ -1,0 +1,26 @@
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  z-index: 50;
+}
+
+/* push toggle to the far right */
+.theme-toggle {
+  margin-left: auto;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  background: rgba(0, 4, 14, 0.9);
+  color: #f9fafb;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.brand {
+  color: red;
+}
