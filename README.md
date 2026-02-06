@@ -5,7 +5,7 @@ An Angular application built for the Flight Info Coding Challenge. This app feat
 ## 🚀 Features & Requirements Met
 
 ### 1️⃣ Application Launch & Hosting
-- **Stack**: Angular 19+ (Standalone Components), Firebase Hosting.
+- **Stack**: Angular 21 (Standalone Components), Firebase Hosting.
 - **Routing**: Lazy-loaded routes with `AngularFireAuthGuard` for secure access control.
 
 ### 2️⃣ Authentication Gate
