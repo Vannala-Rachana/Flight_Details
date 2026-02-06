@@ -10,6 +10,7 @@
     "flight-challenge": {
       "projectType": "application",
       "schematics": {},
+
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -25,9 +26,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "styles": ["src/styles.css"]
           },
           "configurations": {
             "production": {
