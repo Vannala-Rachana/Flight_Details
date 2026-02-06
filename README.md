@@ -33,6 +33,7 @@ An Angular application built for the Flight Info Coding Challenge. This app feat
   - Success message upon valid submission.
   - Error banner for API failures.
   - Loading state during network requests.
+  - 🌗 Light/Dark Mode: Seamlessly switch between themes based on user preference.
 
 ## 🛠️ Setup & Configuration
 
